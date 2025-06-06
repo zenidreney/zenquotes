@@ -66,99 +66,142 @@ function handleTweetBtnClick() {
 }
 
 function getFeedHtml() {
-    let feedHtml = ``;
-
-    tweetsData.forEach(function (tweet) {
-        let likeIconClass = "";
-
-        if (tweet.isLiked) {
-            likeIconClass = "liked";
-        }
-
-        let retweetIconClass = "";
-
-        if (tweet.isRetweeted) {
-            retweetIconClass = "retweeted";
-        }
-
-        let repliesHtml = "";
-
-        if (tweet.replies.length > 0) {
-            tweet.replies.forEach(function (reply) {
-                repliesHtml += `
-<div class="tweet-reply">
-    <div class="tweet-input-area">
-			<img src="media/scrimbalogo.png" class="profile-pic">
-			<textarea placeholder="Here is what I think..." id="tweet-input"></textarea>
-            
-        
-        </div>
-        <button id="" class="reply-btn">Reply</button>  
-		  
+    const feedHtml = document.createElement("div");
     
-    <div class="tweet-inner">
+    tweetsData.forEach(function(tweet){
         
-        <img src="${reply.profilePic}" class="profile-pic">
-            <div>
-                <p class="handle">${reply.handle}</p>
-                <p class="tweet-text">${reply.tweetText}</p>
-            </div>
-        </div>
-</div>
-`;
-            });
-        } else {
-            repliesHtml += `
-<div class="tweet-reply">
-    <div class="tweet-input-area">
-			<img src="media/scrimbalogo.png" class="profile-pic">
-			<textarea placeholder="Here is what I think..." id="tweet-input"></textarea>
-            
+        /*Feed Container*/
         
-        </div>
-        <button id="" class="reply-btn">Reply</button> `;
-        }
+        const tweetDiv = document.createElement("div");
+        tweetDiv.className = "tweet";
+            const tweetInner = document.createElement("div");
+            tweetInner.className = "tweet-inner";
+        
+                const profilePic = document.createElement("img");
+                profilePic.src = tweet.profilePic;
+                profilePic.className = "profile-pic";
+                
+                const tweetContentDiv = document.createElement("div");
+                
+                    const tweetHandle = document.createElement("p");
+                    tweetHandle.className = "handle";
+                    tweetHandle.textContent = tweet.handle;
+        
+                    const tweetText = document.createElement("p");
+                    tweetText.className = "tweet-text";
+                    tweetText.textContent = tweet.tweetText;
+        
+                    const iconsDiv = document.createElement("div");
+                    iconsDiv.className = "tweet-details";
+                        const commentsContainer = document.createElement("span");
+                        commentsContainer.className = "tweet-detail";
+        
+                            const repliesIcon = document.createElement("i");
+                            repliesIcon.className = "fa-regular fa-comment-dots";
+                            repliesIcon.setAttribute("data-reply", tweet.uuid);
+                            //console.log(repliesIcon.dataset.reply);
+                            
+                            const repliesCount = document.createElement("div");
+                            repliesCount.textContent = tweet.replies.length;
+        
+                            commentsContainer.append(repliesIcon, repliesCount);
+        
+                        
+                        const likesContainer = document.createElement("span");
+                        likesContainer.className = "tweet-detail";
+        
+                            const likesIcon = document.createElement("i");
+                            likesIcon.className = "fa-solid fa-heart";
+                            likesIcon.setAttribute("data-like", tweet.uuid);
+                            //console.log(likesIcon.dataset.like);
+                            
+                            const likesCount = document.createElement("div");
+                            likesCount.textContent = tweet.likes;
+        
+                        likesContainer.append(likesIcon, likesCount);
+        
+                        const shareContainer = document.createElement("span");
+                        shareContainer.className = "tweet-detail";
+        
+                            const shareIcon = document.createElement("i");
+                            shareIcon.className = "fa-solid fa-retweet";
+                            shareIcon.setAttribute("data-share", tweet.uuid);
+                            //console.log(shareIcon.dataset.share);
+                            
+                            const shareCount = document.createElement("div");
+                            shareCount.textContent = tweet.retweets;
+        
+                        shareContainer.append(shareIcon, shareCount);
+        
+                    iconsDiv.append(commentsContainer, likesContainer, shareContainer);
+        
+                tweetContentDiv.append(tweetHandle, tweetText, iconsDiv);
+            tweetInner.append(profilePic, tweetContentDiv);
+        
+        /*Replies Container*/
+        
+        
+        const repliesContainer = document.createElement("div");
+        repliesContainer.className = "hidden";
+        repliesContainer.id = "replies-" + tweet.uuid;
+        //console.log(repliesContainer.id)
+        
+            if(tweet.replies.length > 0){
 
-        feedHtml += `
-<div class="tweet">
-    <div class="tweet-inner">
-        <img src="${tweet.profilePic}" class="profile-pic">
-        <div>
-            <p class="handle">${tweet.handle}</p>
-            <p class="tweet-text">${tweet.tweetText}</p>
-            <div class="tweet-details">
-                <span class="tweet-detail">
-                    <i class="fa-regular fa-comment-dots"
-                    data-reply="${tweet.uuid}"
-                    ></i>
-                    ${tweet.replies.length}
-                </span>
-                <span class="tweet-detail">
-                    <i class="fa-solid fa-heart ${likeIconClass}"
-                    data-like="${tweet.uuid}"
-                    ></i>
-                    ${tweet.likes}
-                </span>
-                <span class="tweet-detail">
-                    <i class="fa-solid fa-retweet ${retweetIconClass}"
-                    data-retweet="${tweet.uuid}"
-                    ></i>
-                    ${tweet.retweets}
-                </span>
-            </div>   
-        </div>            
-    </div>
-    <div class="hidden" id="replies-${tweet.uuid}">
-        ${repliesHtml}
-    </div>   
-</div>
-`;
+                tweet.replies.forEach(function(reply){
+                    
+                    const repliesDiv = document.createElement("div");
+                    repliesDiv.className = "tweet-reply";
+                        
+                    
+                            const tweetReplyInner = document.createElement("div");
+                            tweetReplyInner.className = "tweet-inner";           
+                    
+                                const replyAvatar = document.createElement("img");
+                                replyAvatar.src = reply.profilePic;
+                                replyAvatar.className = "profile-pic";
+
+                                const replyTextContainer = document.createElement("div");
+
+                                    const replyHandle = document.createElement("p");
+                                    replyHandle.className = "handle";
+                                    replyHandle.textContent = reply.handle;
+
+                                    const replyText = document.createElement("p");
+                                    replyText.className = "tweet-text";
+                                    replyText.textContent = reply.tweetText;
+
+                                replyTextContainer.append(replyHandle, replyText);
+
+
+                            tweetReplyInner.append(replyAvatar, replyTextContainer);
+                
+            
+                    repliesDiv.append(tweetReplyInner);
+                
+        repliesContainer.append(repliesDiv);
+            
+            });       
+            
+        }
+        
+        tweetDiv.append(tweetInner, repliesContainer);
+        
+    feedHtml.append(tweetDiv);
+        
     });
+    
+   
     return feedHtml;
 }
 
 function render() {
-    document.getElementById("feed").innerHTML = getFeedHtml();
+    const feed = document.getElementById("feed");
+    feed.innerHTML = "";
+    feed.append(getFeedHtml());
+    
+    
+    //document.getElementById("feed").innerHTML = getFeedHtml();
 }
 
 render();
