@@ -69,10 +69,7 @@ function getFeedHtml() {
     const feedHtml = document.createElement("div");
     
     tweetsData.forEach(function(tweet){
-        
-        
-        
-        
+
         /*Feed Container*/
         
         const tweetDiv = document.createElement("div");
@@ -159,12 +156,32 @@ function getFeedHtml() {
         repliesContainer.id = "replies-" + tweet.uuid;
         //console.log(repliesContainer.id)
         
+                    
+                const replyInputContainer = document.createElement("div");
+                replyInputContainer.className = "tweet-input-area";
+                    
+                        const replyUserAvatar = document.createElement("img");
+                        replyUserAvatar.className = "profile-pic";
+                        replyUserAvatar.src = "media/scrimbalogo.png";
+                                
+                        const replyTextArea = document.createElement("textarea");
+                        replyTextArea.placeholder = "My thoughts...";
+        
+                replyInputContainer.append(replyUserAvatar, replyTextArea);
+            
+                const replyBtn = document.createElement("button");
+                replyBtn.textContent = "Reply";
+        
+        repliesContainer.append(replyInputContainer, replyBtn);
+        
+        
             if(tweet.replies.length > 0){
 
                 tweet.replies.forEach(function(reply){
                     
                     const repliesDiv = document.createElement("div");
                     repliesDiv.className = "tweet-reply";
+                    
                         
                     
                             const tweetReplyInner = document.createElement("div");
