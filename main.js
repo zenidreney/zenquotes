@@ -10,6 +10,8 @@ document.addEventListener("click", function (e) {
         handleReplyClick(e.target.dataset.reply);
     } else if (e.target.id === "tweet-btn") {
         handleTweetBtnClick();
+    } else if (e.target.dataset.replyBtn) {
+        handleReplyBtnClick(e.target.dataset.replyBtn);
     }
 });
 
@@ -63,6 +65,34 @@ function handleTweetBtnClick() {
         render();
         tweetInput.value = "";
     }
+}
+
+function handleReplyBtnClick(tweetId){
+    
+    const replyTextInput = document.getElementById(`reply-input-${tweetId}`);
+    const repliesContainer = document.getElementById(`replies-${tweetId}`);
+    
+    
+    if(replyTextInput.value){
+        const targetTweetObj = tweetsData.filter(function (tweet) {
+        return tweet.uuid === tweetId;
+    })[0];
+     
+        targetTweetObj.replies.unshift({
+            
+            handle: `@Scrimba`,
+            profilePic: `media/scrimbalogo.png`,
+            tweetText: replyTextInput.value,
+            
+            
+        });
+        
+        render();
+        
+        replyTextInput.value = "";
+        
+    }
+
 }
 
 function getFeedHtml() {
@@ -166,11 +196,15 @@ function getFeedHtml() {
                                 
                         const replyTextArea = document.createElement("textarea");
                         replyTextArea.placeholder = "My thoughts...";
+                        replyTextArea.id = "reply-input-" + tweet.uuid;
+                        //console.log(replyTextArea.id);
         
                 replyInputContainer.append(replyUserAvatar, replyTextArea);
             
                 const replyBtn = document.createElement("button");
                 replyBtn.textContent = "Reply";
+                replyBtn.setAttribute("data-reply-btn", tweet.uuid);
+                //console.log(replyBtn.dataset.replyBtn);    
         
         repliesContainer.append(replyInputContainer, replyBtn);
         
