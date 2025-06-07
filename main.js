@@ -1,5 +1,6 @@
 import { tweetsData } from "./data.js";
-import { v4 as uuidv4 } from "https://jspm.dev/uuid";
+//import { v4 as uuidv4 } from "https://jspm.dev/uuid"; // Alternative path is in the script tag of the html.
+//console.log(uuidv4());
 
 document.addEventListener("click", function (e) {
     if (e.target.dataset.like) {
@@ -188,7 +189,7 @@ function getFeedHtml() {
         
                     
                 const replyInputContainer = document.createElement("div");
-                replyInputContainer.className = "tweet-input-area";
+                replyInputContainer.className = "reply-input-area";
                     
                         const replyUserAvatar = document.createElement("img");
                         replyUserAvatar.className = "profile-pic";
@@ -200,13 +201,19 @@ function getFeedHtml() {
                         //console.log(replyTextArea.id);
         
                 replyInputContainer.append(replyUserAvatar, replyTextArea);
-            
-                const replyBtn = document.createElement("button");
-                replyBtn.textContent = "Reply";
-                replyBtn.setAttribute("data-reply-btn", tweet.uuid);
-                //console.log(replyBtn.dataset.replyBtn);    
         
-        repliesContainer.append(replyInputContainer, replyBtn);
+                const replyBtnContainer = document.createElement("div");
+                replyBtnContainer.className = "reply-btn-container";
+            
+                    const replyBtn = document.createElement("button");
+                    replyBtn.textContent = "Reply";
+                    replyBtn.className = "reply-btn";
+                    replyBtn.setAttribute("data-reply-btn", tweet.uuid);
+                    //console.log(replyBtn.dataset.replyBtn);    
+        
+                replyBtnContainer.append(replyBtn)
+        
+        repliesContainer.append(replyInputContainer, replyBtnContainer);
         
         
             if(tweet.replies.length > 0){

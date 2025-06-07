@@ -40,10 +40,16 @@ header{
     padding-bottom: 25px;
 }
 
-.tweet-input-area {
+.tweet-input-area,
+.reply-input-area{
     display: flex;
     align-items: flex-start;
     gap: 10px;
+    margin-top: 10px;
+}
+
+.reply-input-area textarea{
+    font-size: 12px;
 }
 
 /* textareas + btn */
@@ -72,11 +78,18 @@ button,
     font-weight: 600;
 }
 
+.reply-btn-container{
+    display: flex;
+    justify-content: center;
+}
+
 .reply-btn{
+    background-color: #252525;
     width: 60%;
     font-size: 12px;
     padding: 5px 9px;
     margin: 15px;
+    
 }
 
 /* tweet */
