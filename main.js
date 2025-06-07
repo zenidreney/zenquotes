@@ -15,8 +15,33 @@ document.addEventListener("click", function (e) {
         handleReplyBtnClick(e.target.dataset.replyBtn);
     } else if (e.target.dataset.deleteTweet) {
         handleDeleteTweet(e.target.dataset.deleteTweet);
+    } else if (e.target.dataset.deleteReply) {
+        handleDeleteReply(e.target.dataset.deleteReplyParent, e.target.dataset.deleteReply);
     }
 });
+
+function handleDeleteReply(parentTweetId, replyId) {
+    const targetTweetObj = tweetsData.filter(function(tweet){
+        return tweet.uuid === parentTweetId;
+        
+    })[0];
+    
+    if(targetTweetObj){
+        const replyIndex = targetTweetObj.replies.findIndex(function(reply){
+            
+           return reply.uuid === replyId; 
+        });
+        
+        if(replyIndex !== -1) {
+            
+            targetTweetObj.replies.splice(replyIndex, 1);
+            render();
+        }
+        
+    }
+    
+}
+
 
 function handleDeleteTweet(tweetId) {
     const targetTweetIndex = tweetsData.findIndex(function(tweet){
