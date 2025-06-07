@@ -4,8 +4,8 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 document.addEventListener("click", function (e) {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like);
-    } else if (e.target.dataset.retweet) {
-        handleRetweetClick(e.target.dataset.retweet);
+    } else if (e.target.dataset.share) {
+        handleRetweetClick(e.target.dataset.share);
     } else if (e.target.dataset.reply) {
         handleReplyClick(e.target.dataset.reply);
     } else if (e.target.id === "tweet-btn") {
@@ -70,6 +70,9 @@ function getFeedHtml() {
     
     tweetsData.forEach(function(tweet){
         
+        
+        
+        
         /*Feed Container*/
         
         const tweetDiv = document.createElement("div");
@@ -112,6 +115,11 @@ function getFeedHtml() {
         
                             const likesIcon = document.createElement("i");
                             likesIcon.className = "fa-solid fa-heart";
+                            
+                                if(tweet.isLiked){
+                                    likesIcon.className = "fa-solid fa-heart liked";
+                                }
+        
                             likesIcon.setAttribute("data-like", tweet.uuid);
                             //console.log(likesIcon.dataset.like);
                             
@@ -125,6 +133,11 @@ function getFeedHtml() {
         
                             const shareIcon = document.createElement("i");
                             shareIcon.className = "fa-solid fa-retweet";
+        
+                                if (tweet.isRetweeted) {
+                                    shareIcon.className = "fa-solid fa-retweet retweeted";
+                                }
+        
                             shareIcon.setAttribute("data-share", tweet.uuid);
                             //console.log(shareIcon.dataset.share);
                             
