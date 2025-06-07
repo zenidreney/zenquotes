@@ -206,6 +206,8 @@ function getFeedHtml() {
         
                 tweetContentDiv.append(tweetHandle, tweetText, iconsDiv);
         
+            /*Tweet Delete Button*/
+        
                 if(tweet.isTweeted){
                     
                     const deleteTweetBtn = document.createElement("button");
@@ -285,7 +287,27 @@ function getFeedHtml() {
                                     replyText.textContent = reply.tweetText;
 
                                 replyTextContainer.append(replyHandle, replyText);
+                    
+                            /*Reply Delete Button*/
+                    
+                                if(reply.isReplies){
+                                    
+                                    const replyCloseBtnContainer = document.createElement("div");
+                                    replyBtnContainer.className = "reply-close-btn-container";
+                    
+                                        const deleteReplyBtn = document.createElement("button");
+                                        deleteReplyBtn.textContent = "Delete";
+                                        deleteReplyBtn.className = "delete-btn";
+                                        deleteReplyBtn.setAttribute("data-delete-reply", reply.uuid);
+                                        deleteReplyBtn.setAttribute("data-delete-reply-parent", tweet.uuid);
+                                    
+                                    replyCloseBtnContainer.append(deleteReplyBtn);
 
+                                    //console.log(deleteReplyBtn.dataset.deleteReply, deleteReplyBtn.dataset.deleteReplyParent);
+
+                                replyTextContainer.append(replyCloseBtnContainer);
+
+                                }
 
                             tweetReplyInner.append(replyAvatar, replyTextContainer);
                 
