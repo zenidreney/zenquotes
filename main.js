@@ -1,7 +1,7 @@
 import { tweetsData } from "./data.js";
 //import { v4 as uuidv4 } from "https://jspm.dev/uuid"; // Alternative path is in the script tag of the html.
 //console.log(uuidv4());
-import { getFeedHtml, render } from "./renderFeed.js";
+import { render } from "./renderFeed.js";
 
 
 const savedTweetData = localStorage.getItem("tweetsData");

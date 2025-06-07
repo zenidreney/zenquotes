@@ -2,10 +2,10 @@
 
 /*1) Get Feed*/
 
-export function getFeedHtml(tweetsData) {
+export function getFeedHtml(tweets) {
     const feedHtml = document.createElement("div");
     
-    tweetsData.forEach(function(tweet){
+    tweets.forEach(function(tweet){
 
         /*Feed Container*/
         
@@ -210,10 +210,10 @@ export function getFeedHtml(tweetsData) {
 
 /*2) Render Function*/
 
-export function render(tweetsData) {
+export function render(feedHtml) {
     const feed = document.getElementById("feed");
     feed.innerHTML = "";
-    feed.append(getFeedHtml(tweetsData));
+    feed.append(getFeedHtml(feedHtml));
     
     
     //document.getElementById("feed").innerHTML = getFeedHtml();
