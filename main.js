@@ -71,7 +71,7 @@ function handleTweetBtnClick() {
 function handleReplyBtnClick(tweetId){
     
     const replyTextInput = document.getElementById(`reply-input-${tweetId}`);
-    const repliesContainer = document.getElementById(`replies-${tweetId}`);
+    
     
     
     if(replyTextInput.value){
@@ -91,6 +91,9 @@ function handleReplyBtnClick(tweetId){
         render();
         
         replyTextInput.value = "";
+        
+        const repliesContainer = document.getElementById(`replies-${tweetId}`);
+        repliesContainer.classList.remove("hidden");
         
     }
 
