@@ -83,13 +83,18 @@ button,
     justify-content: center;
 }
 
-.reply-btn{
+.reply-btn,
+.delete-btn{
     background-color: #252525;
     width: 60%;
     font-size: 12px;
     padding: 5px 9px;
     margin: 15px;
     
+}
+
+.delete-btn{
+    background-color: #9f0505;
 }
 
 /* tweet */

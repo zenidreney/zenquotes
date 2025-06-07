@@ -13,8 +13,28 @@ document.addEventListener("click", function (e) {
         handleTweetBtnClick();
     } else if (e.target.dataset.replyBtn) {
         handleReplyBtnClick(e.target.dataset.replyBtn);
+    } else if (e.target.dataset.deleteTweet) {
+        handleDeleteTweet(e.target.dataset.deleteTweet);
     }
 });
+
+function handleDeleteTweet(tweetId) {
+    const targetTweetIndex = tweetsData.findIndex(function(tweet){
+        
+        return tweet.uuid === tweetId;
+        
+    });
+    
+    //console.log(targetTweetIndex);
+    
+    if (targetTweetIndex !== -1){
+        
+        tweetsData.splice(targetTweetIndex, 1);
+        render();
+        
+    }
+}
+
 
 function handleLikeClick(tweetId) {
     const targetTweetObj = tweetsData.filter(function (tweet) {
@@ -61,6 +81,7 @@ function handleTweetBtnClick() {
             replies: [],
             isLiked: false,
             isRetweeted: false,
+            isTweeted: true,
             uuid: uuidv4()
         });
         render();
@@ -84,11 +105,15 @@ function handleReplyBtnClick(tweetId){
             handle: `@Scrimba`,
             profilePic: `media/scrimbalogo.png`,
             tweetText: replyTextInput.value,
+            isReplies: true,
+            uuid: uuidv4()
             
             
         });
         
         render();
+        
+        //console.log(targetTweetObj.uuid);
         
         replyTextInput.value = "";
         
@@ -180,6 +205,20 @@ function getFeedHtml() {
                     iconsDiv.append(commentsContainer, likesContainer, shareContainer);
         
                 tweetContentDiv.append(tweetHandle, tweetText, iconsDiv);
+        
+                if(tweet.isTweeted){
+                    
+                    const deleteTweetBtn = document.createElement("button");
+                    deleteTweetBtn.textContent = "Delete";
+                    deleteTweetBtn.className = "delete-btn";
+                    deleteTweetBtn.setAttribute("data-delete-tweet", tweet.uuid);
+                    
+                    //console.log(deleteTweetBtn.dataset.deleteTweet);
+                    
+                tweetContentDiv.append(deleteTweetBtn);
+                    
+                }
+        
             tweetInner.append(profilePic, tweetContentDiv);
         
         /*Replies Container*/
@@ -214,7 +253,7 @@ function getFeedHtml() {
                     replyBtn.setAttribute("data-reply-btn", tweet.uuid);
                     //console.log(replyBtn.dataset.replyBtn);    
         
-                replyBtnContainer.append(replyBtn)
+                replyBtnContainer.append(replyBtn);
         
         repliesContainer.append(replyInputContainer, replyBtnContainer);
         
