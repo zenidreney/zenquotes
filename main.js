@@ -1,6 +1,17 @@
 import { tweetsData } from "./data.js";
 //import { v4 as uuidv4 } from "https://jspm.dev/uuid"; // Alternative path is in the script tag of the html.
 //console.log(uuidv4());
+const savedTweetData = localStorage.getItem("tweetsData");
+
+if(savedTweetData) {
+    const parsedTweets = JSON.parse(savedTweetData);
+    tweetsData.length = 0;
+    
+    parsedTweets.forEach(function(tweet){
+        tweetsData.push(tweet);
+        
+    });
+}
 
 document.addEventListener("click", function (e) {
     if (e.target.dataset.like) {
@@ -20,6 +31,12 @@ document.addEventListener("click", function (e) {
     }
 });
 
+function saveToLocalStorage() {
+    
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData));
+    
+}
+
 function handleDeleteReply(parentTweetId, replyId) {
     const targetTweetObj = tweetsData.filter(function(tweet){
         return tweet.uuid === parentTweetId;
@@ -35,6 +52,8 @@ function handleDeleteReply(parentTweetId, replyId) {
         if(replyIndex !== -1) {
             
             targetTweetObj.replies.splice(replyIndex, 1);
+            
+            saveToLocalStorage();
             render();
         }
         
@@ -55,6 +74,8 @@ function handleDeleteTweet(tweetId) {
     if (targetTweetIndex !== -1){
         
         tweetsData.splice(targetTweetIndex, 1);
+        
+        saveToLocalStorage();
         render();
         
     }
@@ -72,6 +93,9 @@ function handleLikeClick(tweetId) {
         targetTweetObj.likes++;
     }
     targetTweetObj.isLiked = !targetTweetObj.isLiked;
+    
+    
+    saveToLocalStorage();
     render();
 }
 
@@ -86,6 +110,8 @@ function handleRetweetClick(tweetId) {
         targetTweetObj.retweets++;
     }
     targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted;
+    
+    saveToLocalStorage();
     render();
 }
 
@@ -109,6 +135,8 @@ function handleTweetBtnClick() {
             isTweeted: true,
             uuid: uuidv4()
         });
+        
+        saveToLocalStorage();
         render();
         tweetInput.value = "";
     }
@@ -136,6 +164,7 @@ function handleReplyBtnClick(tweetId){
             
         });
         
+        saveToLocalStorage();
         render();
         
         //console.log(targetTweetObj.uuid);
@@ -318,7 +347,7 @@ function getFeedHtml() {
                                 if(reply.isReplies){
                                     
                                     const replyCloseBtnContainer = document.createElement("div");
-                                    replyBtnContainer.className = "reply-close-btn-container";
+                                    replyCloseBtnContainer.className = "reply-close-btn-container";
                     
                                         const deleteReplyBtn = document.createElement("button");
                                         deleteReplyBtn.textContent = "Delete";
