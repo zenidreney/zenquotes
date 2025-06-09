@@ -2,12 +2,13 @@ html, body {
     margin: 0;
     padding: 0;
     font-family: Georgia, serif;
+    background-color: #F5F5F2;
 }
 
 /* typography and icons */
 
 h1{
-    color: #0F8CDF;
+    color: #5D7561;
     margin-bottom: 10px;
     font-size: 20px;
 }
@@ -26,7 +27,7 @@ i{
 }
 
 .retweeted {
-  color: limegreen;
+  color: #D6C49C;
 }
 
 /* layout */
@@ -67,15 +68,20 @@ textarea{
 
 button,
 .reply-btn{
-    background-color: #1DA1F2;
+    background-color: #5D7561;
     border: none;
-    color: white;
+    color: #F5F5F2;
     padding: 10px 19px;
-    border-radius: 20px;
+    border-radius: 5px;
     width: 100%; 
     cursor: pointer;
     font-size: 20px;
     font-weight: 600;
+}
+
+button:hover,
+button:focus{
+    background-color: #6D8E8A;
 }
 
 .reply-btn-container,

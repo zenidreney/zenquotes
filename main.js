@@ -52,8 +52,8 @@ function handleTweetBtnClick() {
 
     if (tweetInput.value) {
         tweetsData.unshift({
-            handle: `@Scrimba`,
-            profilePic: `media/scrimbalogo.png`,
+            handle: `@Zenid`,
+            profilePic: `media/user-avatar.jpg`,
             likes: 0,
             retweets: 0,
             tweetText: tweetInput.value,
@@ -137,8 +137,8 @@ function handleReplyBtnClick(tweetId){
      
         targetTweetObj.replies.unshift({
             
-            handle: `@Scrimba`,
-            profilePic: `media/scrimbalogo.png`,
+            handle: `@Zenid`,
+            profilePic: `media/user-avatar.jpg`,
             tweetText: replyTextInput.value,
             isReplies: true,
             uuid: uuidv4()
