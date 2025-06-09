@@ -19,6 +19,14 @@ if(savedTweetData) {
     });
 }
 
+/*Save to Local Storage*/
+
+function saveToLocalStorage() {
+    
+    localStorage.setItem("tweetsData", JSON.stringify(tweetsData));
+    
+}
+
 /*Event Listeners*/
 
 document.addEventListener("click", function (e) {
@@ -39,13 +47,7 @@ document.addEventListener("click", function (e) {
     }
 });
 
-/*Functions*/
-
-function saveToLocalStorage() {
-    
-    localStorage.setItem("tweetsData", JSON.stringify(tweetsData));
-    
-}
+/*Event Handlers*/
 
 function handleTweetBtnClick() {
     const tweetInput = document.getElementById("tweet-input");
@@ -84,8 +86,7 @@ function handleDeleteTweet(tweetId) {
         tweetsData.splice(targetTweetIndex, 1);
         
         saveToLocalStorage();
-        render(tweetsData);
-        
+        render(tweetsData);  
     }
 }
 
@@ -105,9 +106,9 @@ function handleLikeClick(tweetId) {
     }
     targetTweetObj.isLiked = !targetTweetObj.isLiked;
     
-    
     saveToLocalStorage();
     render(tweetsData);
+
 }
 
 function handleRetweetClick(tweetId) {
@@ -142,8 +143,6 @@ function handleReplyBtnClick(tweetId){
             tweetText: replyTextInput.value,
             isReplies: true,
             uuid: uuidv4()
-            
-            
         });
         
         saveToLocalStorage();
@@ -177,6 +176,9 @@ function handleDeleteReply(parentTweetId, replyId) {
             
             saveToLocalStorage();
             render(tweetsData);
+            
+            const repliesContainer = document.getElementById(`replies-${parentTweetId}`);
+            repliesContainer.classList.remove("hidden");
         }
         
     }
