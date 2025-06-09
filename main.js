@@ -1,10 +1,13 @@
 import { tweetsData } from "./data.js";
-//import { v4 as uuidv4 } from "https://jspm.dev/uuid"; // Alternative path is in the script tag of the html.
-//console.log(uuidv4());
 import { render } from "./renderFeed.js";
+// Alternative path is in the script tag of the html.
+//import { v4 as uuidv4 } from "https://jspm.dev/uuid"; 
+//console.log(uuidv4());
 
 
 const savedTweetData = localStorage.getItem("tweetsData");
+
+/*Load from Local Storage*/
 
 if(savedTweetData) {
     const parsedTweets = JSON.parse(savedTweetData);
@@ -40,30 +43,28 @@ function saveToLocalStorage() {
     
 }
 
-function handleDeleteReply(parentTweetId, replyId) {
-    const targetTweetObj = tweetsData.filter(function(tweet){
-        return tweet.uuid === parentTweetId;
-        
-    })[0];
-    
-    if(targetTweetObj){
-        const replyIndex = targetTweetObj.replies.findIndex(function(reply){
-            
-           return reply.uuid === replyId; 
+function handleTweetBtnClick() {
+    const tweetInput = document.getElementById("tweet-input");
+
+    if (tweetInput.value) {
+        tweetsData.unshift({
+            handle: `@Scrimba`,
+            profilePic: `media/scrimbalogo.png`,
+            likes: 0,
+            retweets: 0,
+            tweetText: tweetInput.value,
+            replies: [],
+            isLiked: false,
+            isRetweeted: false,
+            isTweeted: true,
+            uuid: uuidv4()
         });
         
-        if(replyIndex !== -1) {
-            
-            targetTweetObj.replies.splice(replyIndex, 1);
-            
-            saveToLocalStorage();
-            render(tweetsData);
-        }
-        
+        saveToLocalStorage();
+        render(tweetsData);
+        tweetInput.value = "";
     }
-    
 }
-
 
 function handleDeleteTweet(tweetId) {
     const targetTweetIndex = tweetsData.findIndex(function(tweet){
@@ -84,6 +85,9 @@ function handleDeleteTweet(tweetId) {
     }
 }
 
+function handleReplyClick(replyId) {
+    document.getElementById(`replies-${replyId}`).classList.toggle("hidden");
+}
 
 function handleLikeClick(tweetId) {
     const targetTweetObj = tweetsData.filter(function (tweet) {
@@ -118,38 +122,9 @@ function handleRetweetClick(tweetId) {
     render(tweetsData);
 }
 
-function handleReplyClick(replyId) {
-    document.getElementById(`replies-${replyId}`).classList.toggle("hidden");
-}
-
-function handleTweetBtnClick() {
-    const tweetInput = document.getElementById("tweet-input");
-
-    if (tweetInput.value) {
-        tweetsData.unshift({
-            handle: `@Scrimba`,
-            profilePic: `media/scrimbalogo.png`,
-            likes: 0,
-            retweets: 0,
-            tweetText: tweetInput.value,
-            replies: [],
-            isLiked: false,
-            isRetweeted: false,
-            isTweeted: true,
-            uuid: uuidv4()
-        });
-        
-        saveToLocalStorage();
-        render(tweetsData);
-        tweetInput.value = "";
-    }
-}
-
 function handleReplyBtnClick(tweetId){
     
     const replyTextInput = document.getElementById(`reply-input-${tweetId}`);
-    
-    
     
     if(replyTextInput.value){
         const targetTweetObj = tweetsData.filter(function (tweet) {
@@ -176,9 +151,32 @@ function handleReplyBtnClick(tweetId){
         
         const repliesContainer = document.getElementById(`replies-${tweetId}`);
         repliesContainer.classList.remove("hidden");
-        
     }
 
+}
+
+function handleDeleteReply(parentTweetId, replyId) {
+    const targetTweetObj = tweetsData.filter(function(tweet){
+        return tweet.uuid === parentTweetId;
+        
+    })[0];
+    
+    if(targetTweetObj){
+        const replyIndex = targetTweetObj.replies.findIndex(function(reply){
+            
+           return reply.uuid === replyId; 
+        });
+        
+        if(replyIndex !== -1) {
+            
+            targetTweetObj.replies.splice(replyIndex, 1);
+            
+            saveToLocalStorage();
+            render(tweetsData);
+        }
+        
+    }
+    
 }
 
 render(tweetsData);
