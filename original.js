@@ -1,3 +1,5 @@
+/*This is the original file from Scrimba Front-End Course*/
+
 import { tweetsData } from "./data.js";
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 

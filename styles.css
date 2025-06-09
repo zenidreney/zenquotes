@@ -26,7 +26,7 @@ i{
     color: red;
 }
 
-.retweeted {
+.requoted {
   color: #D6C49C;
 }
 
@@ -41,7 +41,7 @@ header{
     padding-bottom: 25px;
 }
 
-.tweet-input-area,
+.quote-input-area,
 .reply-input-area{
     display: flex;
     align-items: flex-start;
@@ -110,34 +110,34 @@ button:focus{
     background-color: #9f0505;
 }
 
-/* tweet */
+/* quote */
 
-.tweet{
+.quote{
     border-top: 1px solid lightgray;
     padding: 20px 0 0 0;
     width: 100%;
     margin: 15px 0;
 }
 
-.tweet-inner{
+.quote-inner{
     display: flex;
     align-items: flex-start;
     gap: 10px;
 }
 
-.tweet-details{
+.quote-details{
     display: flex;
     font-size: 13px;
     justify-content: space-between;
     width: 160px;
 }
 
-.tweet-detail{
+.quote-detail{
     display: flex;
     gap: 4px;
 }
 
-.tweet-reply{
+.quote-reply{
     border-top: 1px solid lightgray;
     padding: 20px 0 0 0px;
     margin: 10px 0 10px 40px;
@@ -151,7 +151,7 @@ button:focus{
     margin-top: 0;
 }
 
-.tweet-text{
+.quote-text{
     width: 207px;
     font-size: 14px;
     line-height: 20px;

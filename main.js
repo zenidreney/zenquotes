@@ -1,20 +1,20 @@
-import { tweetsData } from "./data.js";
+import { quotesData } from "./data.js";
 import { render } from "./renderFeed.js";
 // Alternative path is in the script tag of the html.
 //import { v4 as uuidv4 } from "https://jspm.dev/uuid"; 
 //console.log(uuidv4());
 
 
-const savedTweetData = localStorage.getItem("tweetsData");
+const savedQuoteData = localStorage.getItem("quotesData");
 
 /*Load from Local Storage*/
 
-if(savedTweetData) {
-    const parsedTweets = JSON.parse(savedTweetData);
-    tweetsData.length = 0;
+if(savedQuoteData) {
+    const parsedQuotes = JSON.parse(savedQuoteData);
+    quotesData.length = 0;
     
-    parsedTweets.forEach(function(tweet){
-        tweetsData.push(tweet);
+    parsedQuotes.forEach(function(quote){
+        quotesData.push(quote);
         
     });
 }
@@ -23,7 +23,7 @@ if(savedTweetData) {
 
 function saveToLocalStorage() {
     
-    localStorage.setItem("tweetsData", JSON.stringify(tweetsData));
+    localStorage.setItem("quotesData", JSON.stringify(quotesData));
     
 }
 
@@ -33,15 +33,15 @@ document.addEventListener("click", function (e) {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like);
     } else if (e.target.dataset.share) {
-        handleRetweetClick(e.target.dataset.share);
+        handleRequoteClick(e.target.dataset.share);
     } else if (e.target.dataset.reply) {
         handleReplyClick(e.target.dataset.reply);
-    } else if (e.target.id === "tweet-btn") {
-        handleTweetBtnClick();
+    } else if (e.target.id === "quote-btn") {
+        handleQuoteBtnClick();
     } else if (e.target.dataset.replyBtn) {
         handleReplyBtnClick(e.target.dataset.replyBtn);
-    } else if (e.target.dataset.deleteTweet) {
-        handleDeleteTweet(e.target.dataset.deleteTweet);
+    } else if (e.target.dataset.deleteQuote) {
+        handleDeleteQuote(e.target.dataset.deleteQuote);
     } else if (e.target.dataset.deleteReply) {
         handleDeleteReply(e.target.dataset.deleteReplyParent, e.target.dataset.deleteReply);
     }
@@ -49,44 +49,44 @@ document.addEventListener("click", function (e) {
 
 /*Event Handlers*/
 
-function handleTweetBtnClick() {
-    const tweetInput = document.getElementById("tweet-input");
+function handleQuoteBtnClick() {
+    const quoteInput = document.getElementById("quote-input");
 
-    if (tweetInput.value) {
-        tweetsData.unshift({
+    if (quoteInput.value) {
+        quotesData.unshift({
             handle: `@Zenid`,
             profilePic: `media/user-avatar.jpg`,
             likes: 0,
-            retweets: 0,
-            tweetText: tweetInput.value,
+            reQuotes: 0,
+            quoteText: quoteInput.value,
             replies: [],
             isLiked: false,
-            isRetweeted: false,
-            isTweeted: true,
+            isRequoted: false,
+            isQuoted: true,
             uuid: uuidv4()
         });
         
         saveToLocalStorage();
-        render(tweetsData);
-        tweetInput.value = "";
+        render(quotesData);
+        quoteInput.value = "";
     }
 }
 
-function handleDeleteTweet(tweetId) {
-    const targetTweetIndex = tweetsData.findIndex(function(tweet){
+function handleDeleteQuote(quoteId) {
+    const targetQuoteIndex = quotesData.findIndex(function(quote){
         
-        return tweet.uuid === tweetId;
+        return quote.uuid === quoteId;
         
     });
     
-    //console.log(targetTweetIndex);
+    //console.log(targetQuoteIndex);
     
-    if (targetTweetIndex !== -1){
+    if (targetQuoteIndex !== -1){
         
-        tweetsData.splice(targetTweetIndex, 1);
+        quotesData.splice(targetQuoteIndex, 1);
         
         saveToLocalStorage();
-        render(tweetsData);  
+        render(quotesData);  
     }
 }
 
@@ -94,90 +94,90 @@ function handleReplyClick(replyId) {
     document.getElementById(`replies-${replyId}`).classList.toggle("hidden");
 }
 
-function handleLikeClick(tweetId) {
-    const targetTweetObj = tweetsData.filter(function (tweet) {
-        return tweet.uuid === tweetId;
+function handleLikeClick(quoteId) {
+    const targetQuoteObj = quotesData.filter(function (quote) {
+        return quote.uuid === quoteId;
     })[0];
 
-    if (targetTweetObj.isLiked) {
-        targetTweetObj.likes--;
+    if (targetQuoteObj.isLiked) {
+        targetQuoteObj.likes--;
     } else {
-        targetTweetObj.likes++;
+        targetQuoteObj.likes++;
     }
-    targetTweetObj.isLiked = !targetTweetObj.isLiked;
+    targetQuoteObj.isLiked = !targetQuoteObj.isLiked;
     
     saveToLocalStorage();
-    render(tweetsData);
+    render(quotesData);
 
 }
 
-function handleRetweetClick(tweetId) {
-    const targetTweetObj = tweetsData.filter(function (tweet) {
-        return tweet.uuid === tweetId;
+function handleRequoteClick(quoteId) {
+    const targetQuoteObj = quotesData.filter(function (quote) {
+        return quote.uuid === quoteId;
     })[0];
 
-    if (targetTweetObj.isRetweeted) {
-        targetTweetObj.retweets--;
+    if (targetQuoteObj.isRequoted) {
+        targetQuoteObj.reQuotes--;
     } else {
-        targetTweetObj.retweets++;
+        targetQuoteObj.reQuotes++;
     }
-    targetTweetObj.isRetweeted = !targetTweetObj.isRetweeted;
+    targetQuoteObj.isRequoted = !targetQuoteObj.isRequoted;
     
     saveToLocalStorage();
-    render(tweetsData);
+    render(quotesData);
 }
 
-function handleReplyBtnClick(tweetId){
+function handleReplyBtnClick(quoteId){
     
-    const replyTextInput = document.getElementById(`reply-input-${tweetId}`);
+    const replyTextInput = document.getElementById(`reply-input-${quoteId}`);
     
     if(replyTextInput.value){
-        const targetTweetObj = tweetsData.filter(function (tweet) {
-        return tweet.uuid === tweetId;
+        const targetQuoteObj = quotesData.filter(function (quote) {
+        return quote.uuid === quoteId;
     })[0];
      
-        targetTweetObj.replies.unshift({
+        targetQuoteObj.replies.unshift({
             
             handle: `@Zenid`,
             profilePic: `media/user-avatar.jpg`,
-            tweetText: replyTextInput.value,
+            quoteText: replyTextInput.value,
             isReplies: true,
             uuid: uuidv4()
         });
         
         saveToLocalStorage();
-        render(tweetsData);
+        render(quotesData);
         
-        //console.log(targetTweetObj.uuid);
+        //console.log(targetQuoteObj.uuid);
         
         replyTextInput.value = "";
         
-        const repliesContainer = document.getElementById(`replies-${tweetId}`);
+        const repliesContainer = document.getElementById(`replies-${quoteId}`);
         repliesContainer.classList.remove("hidden");
     }
 
 }
 
-function handleDeleteReply(parentTweetId, replyId) {
-    const targetTweetObj = tweetsData.filter(function(tweet){
-        return tweet.uuid === parentTweetId;
+function handleDeleteReply(parentQuoteId, replyId) {
+    const targetQuoteObj = quotesData.filter(function(quote){
+        return quote.uuid === parentQuoteId;
         
     })[0];
     
-    if(targetTweetObj){
-        const replyIndex = targetTweetObj.replies.findIndex(function(reply){
+    if(targetQuoteObj){
+        const replyIndex = targetQuoteObj.replies.findIndex(function(reply){
             
            return reply.uuid === replyId; 
         });
         
         if(replyIndex !== -1) {
             
-            targetTweetObj.replies.splice(replyIndex, 1);
+            targetQuoteObj.replies.splice(replyIndex, 1);
             
             saveToLocalStorage();
-            render(tweetsData);
+            render(quotesData);
             
-            const repliesContainer = document.getElementById(`replies-${parentTweetId}`);
+            const repliesContainer = document.getElementById(`replies-${parentQuoteId}`);
             repliesContainer.classList.remove("hidden");
         }
         
@@ -185,4 +185,4 @@ function handleDeleteReply(parentTweetId, replyId) {
     
 }
 
-render(tweetsData);
+render(quotesData);
