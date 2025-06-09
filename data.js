@@ -1,58 +1,60 @@
 export const tweetsData = [
     {
-        handle: `@TrollBot66756542 💎`,
-        profilePic: `media/troll.jpg`,
-        likes: 27,
-        retweets: 10,
-        tweetText: `Buy Bitcoin, ETH Make 💰💰💰 low low prices. 
-            Guaranteed return on investment. HMU DMs open!!`,
+        handle: `@VoidWhisperer 🌀`,
+        profilePic: `media/monk-avatar.jpg`,
+        likes: 132,
+        retweets: 47,
+        tweetText: `The stillness within the stillness is not the true stillness. 
+        True stillness is when the dust settles of its own accord.`,
         replies: [],
         isLiked: false,
         isRetweeted: false,
-        uuid: "4b161eee-c0f5-4545-9c4b-8562944223ee"
+        uuid: "e3f8c9dd-5241-4a23-a14e-bfdadce01d01"
     },
     {
-        handle: `@Elon ✅`,
-        profilePic: `media/musk.png`,
-        likes: 6500,
-        retweets: 234,
-        tweetText: `I need volunteers for a one-way mission to Mars 🪐. No experience necessary🚀`,
+        handle: `@ElusiveTao ☯️`,
+        profilePic: `media/taoist-master.jpg`,
+        likes: 983,
+        retweets: 120,
+        tweetText: `Wuwei is not doing nothing. It is doing everything without force.
+        Like water shaping mountains through patience.`,
         replies: [
             {
-                handle: `@TomCruise ✅`,
-                profilePic: `media/tcruise.png`,
-                tweetText: `Yes! Sign me up! 😎🛩`
+                handle: `@StoneTower 🍵`,
+                profilePic: `media/stone-tower.jpg`,
+                tweetText: `So true. The river never tries, yet it always finds the ocean.`
             },
             {
-                handle: `@ChuckNorris ✅`,
-                profilePic: `media/chucknorris.jpeg`,
-                tweetText: `I went last year😴`
+                handle: `@WalkingClouds 🌫️`,
+                profilePic: `media/clouds.jpg`,
+                tweetText: `I read this under a pine tree, and the tree nodded.`
             }
         ],
         isLiked: false,
         isRetweeted: false,
-        uuid: "3c23454ee-c0f5-9g9g-9c4b-77835tgs2"
+        uuid: "9f43b912-1d49-49d3-a908-505c43ea7aa3"
     },
     {
-        handle: `@NoobCoder12`,
-        profilePic: `media/flower.png`,
-        likes: 10,
-        retweets: 3,
-        tweetText: `Are you a coder if you only know HTML?`,
+        handle: `@BeginnerMind 🪷`,
+        profilePic: `media/meditator.jpg`,
+        likes: 58,
+        retweets: 14,
+        tweetText: `If you seek it, you will not find it. 
+        When you sit in silence, Wuji reveals itself.`,
         replies: [
             {
-                handle: `@StackOverflower ☣️`,
-                profilePic: `media/overflow.png`,
-                tweetText: `No. Obviosuly not. Go get a job in McDonald's.`
+                handle: `@LanternInMist 🎐`,
+                profilePic: `media/lantern.jpg`,
+                tweetText: `The more I let go, the closer it feels.`
             },
             {
-                handle: `@YummyCoder64`,
-                profilePic: `media/love.png`,
-                tweetText: `You are wonderful just as you are! ❤️`
+                handle: `@teaLover 🪨`,
+                profilePic: `media/tea.jpg`,
+                tweetText: `Even not finding is finding.`
             }
         ],
         isLiked: false,
         isRetweeted: false,
-        uuid: "8hy671sff-c0f5-4545-9c4b-1237gyys45"
+        uuid: "b6de79fa-3ec1-4261-a5ea-c32aef293bb5"
     }
 ];

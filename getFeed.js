@@ -111,7 +111,7 @@ export function getFeedHtml(tweetsData) {
                     
                         const replyUserAvatar = document.createElement("img");
                         replyUserAvatar.className = "profile-pic";
-                        replyUserAvatar.src = "media/scrimbalogo.png";
+                        replyUserAvatar.src = "media/user-avatar.jpg";
                                 
                         const replyTextArea = document.createElement("textarea");
                         replyTextArea.placeholder = "My thoughts...";

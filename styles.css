@@ -1,7 +1,7 @@
 html, body {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto', sans-serif;
+    font-family: Georgia, serif;
 }
 
 /* typography and icons */
@@ -157,6 +157,7 @@ button,
     border: 1px solid lightgray;
     border-radius: 50%;
     width: 48px;
+    height: 48px;
 }
 
 /* utility */
