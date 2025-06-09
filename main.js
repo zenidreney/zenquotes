@@ -19,6 +19,8 @@ if(savedTweetData) {
     });
 }
 
+/*Event Listeners*/
+
 document.addEventListener("click", function (e) {
     if (e.target.dataset.like) {
         handleLikeClick(e.target.dataset.like);
@@ -36,6 +38,8 @@ document.addEventListener("click", function (e) {
         handleDeleteReply(e.target.dataset.deleteReplyParent, e.target.dataset.deleteReply);
     }
 });
+
+/*Functions*/
 
 function saveToLocalStorage() {
     
