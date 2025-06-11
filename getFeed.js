@@ -44,11 +44,11 @@ export function getFeedHtml(quotesData) {
                         likesContainer.className = "quote-detail";
         
                             const likesIcon = document.createElement("i");
-                            likesIcon.className = "fa-solid fa-heart";
+                            likesIcon.className = !quote.isLiked ? "fa-solid fa-heart" : "fa-solid fa-heart liked";
                             
-                                if(quote.isLiked){
-                                    likesIcon.className = "fa-solid fa-heart liked";
-                                }
+                                //if(quote.isLiked){
+                                //    likesIcon.className = "fa-solid fa-heart liked";
+                                //}
         
                             likesIcon.setAttribute("data-like", quote.uuid);
                             //console.log(likesIcon.dataset.like);
@@ -62,11 +62,12 @@ export function getFeedHtml(quotesData) {
                         shareContainer.className = "quote-detail";
         
                             const shareIcon = document.createElement("i");
-                            shareIcon.className = "fa-solid fa-retweet";
+                            shareIcon.className = !quote.isRequoted ? "fa-solid fa-retweet" 
+                                                    : "fa-solid fa-retweet requoted";
         
-                                if (quote.isRequoted) {
-                                    shareIcon.className = "fa-solid fa-retweet requoted";
-                                }
+                                //if (quote.isRequoted) {
+                                //    shareIcon.className = "fa-solid fa-retweet requoted";
+                                //}
         
                             shareIcon.setAttribute("data-share", quote.uuid);
                             //console.log(shareIcon.dataset.share);
