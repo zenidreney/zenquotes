@@ -41,6 +41,18 @@ header{
     padding-bottom: 25px;
 }
 
+.header-div{
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    gap: 5px;
+} 
+
+.header-div img{
+    filter: grayscale(50%) sepia(100%);
+    
+}
+
 .quote-input-area,
 .reply-input-area{
     display: flex;
@@ -139,7 +151,7 @@ button:focus{
 
 .quote-reply{
     border-top: 1px solid lightgray;
-    padding: 20px 0 0 0px;
+    padding: 20px 0 0 0;
     margin: 10px 0 10px 40px;
     width: 80%;
 }
