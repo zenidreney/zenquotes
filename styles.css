@@ -43,9 +43,10 @@ header{
 
 .header-div{
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: space-between;
     margin-top: 10px;
-    gap: 5px;
+    
 } 
 
 .header-div img{
